@@ -28,7 +28,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: [
+    'http://prk.mesto.nomoredomains.sbs',
+    'https://prk.mesto.nomoredomains.sbs',
+    'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
   allowedHeaders: ['Authorization', 'Content-type'],
