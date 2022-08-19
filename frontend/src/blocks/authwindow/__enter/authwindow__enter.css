@@ -1,0 +1,21 @@
+.authwindow__enter{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 560px){
+  .authwindow__enter{
+    flex-direction: column;
+    width: 260px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,7 @@
+@media screen and (max-width: 560px){
+  .header__link_is_auth{
+    margin-right: 8vw;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

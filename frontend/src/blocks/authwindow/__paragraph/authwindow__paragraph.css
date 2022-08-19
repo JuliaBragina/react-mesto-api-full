@@ -1,0 +1,10 @@
+.authwindow__paragraph{
+  margin: 0;
+  margin-right: 2px;
+}
+
+@media screen and (max-width: 560px){
+  .authwindow__paragraph{
+    margin: 0 auto;
+  }
+}

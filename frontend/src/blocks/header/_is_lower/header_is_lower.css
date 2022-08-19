@@ -1,0 +1,20 @@
+.header_is_lower{
+  position: relative;
+  padding-top: 149px;
+  transition: all .2s;
+}
+
+.header_is_lower::before{
+  content: ' ';
+  border-bottom: 1px solid rgb(84, 84, 84, .7);
+  display: block;
+}
+
+@media screen and (min-width: 600px){
+    .header_is_lower{
+      padding-top: 0;
+    }
+    .header_is_lower::before{
+      display: none;
+    }
+  }

@@ -1,0 +1,10 @@
+.authwindow__container{
+  width: 358px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 560px){
+  .authwindow__container{
+    max-width: 260px;
+  }
+}

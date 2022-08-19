@@ -1,0 +1,16 @@
+.authwindow__form{
+  max-width: 358px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 560px){
+  .authwindow__form{
+    width: 81vw;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .authwindow__form{
+    width: 260px;
+  }
+}

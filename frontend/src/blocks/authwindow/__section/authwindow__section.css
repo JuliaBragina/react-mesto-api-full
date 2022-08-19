@@ -1,0 +1,19 @@
+.authwindow__section{
+  padding-bottom: 30px;
+  width: 358px;
+}
+
+.authwindow__section:last-of-type{
+    padding-bottom: 216px;
+}
+
+
+@media screen and (max-width: 560px){
+  .authwindow__section{
+    max-width: 260px;
+  }
+  .authwindow__section:last-of-type{
+    padding-bottom: 173px;
+    max-width: 260px;
+  }
+}

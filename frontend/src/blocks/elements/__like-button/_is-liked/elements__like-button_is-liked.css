@@ -1,0 +1,5 @@
+.elements__like-button_is-liked{
+  background: url('../../../../images/liked.svg') center no-repeat;
+  background-size: 100%;
+  background-color: #fff;
+}

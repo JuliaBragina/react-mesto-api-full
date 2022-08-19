@@ -1,0 +1,32 @@
+.authwindow__button{
+  width: 358px;
+  height: 50px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: opacity .4s;
+  border-radius: 2px;
+
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #000;
+  background-color: #fff;
+}
+
+.authwindow__button:hover{
+  opacity: .85;
+}
+
+@media screen and (max-width: 560px){
+  .authwindow__button{
+    width: 260px;
+
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
