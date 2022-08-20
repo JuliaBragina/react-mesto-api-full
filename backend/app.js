@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
@@ -31,11 +32,18 @@ app.use(cors({
   origin: [
     'http://prk.mesto.nomoredomains.sbs',
     'https://prk.mesto.nomoredomains.sbs',
-    'http://localhost:3000'],
+    'http://localhost:3000',
+    'https://localhost:3000'],
   credentials: true,
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH'],
   allowedHeaders: ['Authorization', 'Content-type'],
 }));
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 // роуты, не требующие авторизации
 app.post('/signin', celebrate({
