@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const router = require('./routes');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { avatarRegExp } = require('./utils/regexp');
 const { NotFoundError } = require('./utils/errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('cors');
 
 const { PORT = 5000 } = process.env;
 const app = express();
@@ -75,13 +75,13 @@ app.use(auth);
 // роуты, которым авторизация нужна
 app.use(router);
 
-app.use(errorLogger);
-
-app.use(errors());
-
 app.use(() => {
   throw new NotFoundError('Страница не найдена.');
 });
+
+app.use(errorLogger);
+
+app.use(errors());
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;

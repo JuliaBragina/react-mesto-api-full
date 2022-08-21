@@ -3,3 +3,4 @@
   
 Ссылка на сайт: https://prk.mesto.nomoredomains.sbs
 IP-адрес сервера: 84.201.133.71
+Домен сервера: https://api.prk.mesto.nomoredomains.sbs
