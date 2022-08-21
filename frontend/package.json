@@ -1,6 +1,5 @@
 {
   "name": "react-mesto-auth",
-  "homepage": "https://juliabragina.github.io/react-mesto-auth/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +19,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deployServer": "npm run build && scp -r ./build/* prk-mesto@84.201.133.71:/home/prk-mesto/react-mesto-api-full/frontend"
+    "deployServer": "npm run build && scp -r ./build/* prk-mesto@84.201.133.71:/home/prk-mesto/react-mesto-api-full/frontend/build"
   },
   "eslintConfig": {
     "extends": [
