@@ -168,7 +168,6 @@ function App() {
       if (res.token) {
         localStorage.setItem('token', res.token);
         setToken(true);
-        console.log(token);
         history.push("/mesto-react-auth");
         setLoggedIn(true);
       }
