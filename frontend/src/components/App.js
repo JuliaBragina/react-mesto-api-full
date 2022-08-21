@@ -31,6 +31,7 @@ function App() {
   const [userData, setUserData] = useState({});
   const [userEmail, setUserEmail] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [token, setToken] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -166,6 +167,8 @@ function App() {
     .then((res) => {
       if (res.token) {
         localStorage.setItem('token', res.token);
+        setToken(true);
+        console.log(token);
         history.push("/mesto-react-auth");
         setLoggedIn(true);
       }
@@ -178,7 +181,8 @@ function App() {
 
   function tokenCheck() {
     const jwt = localStorage.getItem('token');
-    if(jwt){
+    if (jwt) {
+      setToken(true);
       auth.checkJTW(jwt)
         .then((res) => {
           setUserData(res);
