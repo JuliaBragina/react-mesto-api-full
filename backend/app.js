@@ -30,10 +30,10 @@ app.use(requestLogger);
 
 app.use(cors({
   origin: [
-    'http://prk.mesto.nomoredomains.sbs',
-    'https://prk.mesto.nomoredomains.sbs',
-    'http://api.prk.mesto.nomoredomains.sbs',
-    'https://api.prk.mesto.nomoredomains.sbs',
+    'http://prkmesto.space',
+    'https://prkmesto.space',
+    'http://api.prkmesto.space',
+    'https://api.prkmesto.space',
     'http://localhost:3000',
     'https://localhost:3000'],
   credentials: true,

@@ -19,7 +19,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deployServer": "npm run build && scp -r ./build/* prk-mesto@84.201.133.71:/home/prk-mesto/react-mesto-api-full/frontend/build"
+    "deployServer": "npm run build && scp -r ./build/* ssh root@81.163.26.6:/root/frontend"
   },
   "eslintConfig": {
     "extends": [
