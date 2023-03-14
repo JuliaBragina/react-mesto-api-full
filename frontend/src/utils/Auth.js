@@ -1,5 +1,4 @@
-export const BASE_URL = 'https://api.prk.mesto.nomoredomains.sbs';
-
+export const BASE_URL = 'https://api.prkmesto.space';
 const checkResponse = (res) => {
   if(res.ok){
     return res.json();

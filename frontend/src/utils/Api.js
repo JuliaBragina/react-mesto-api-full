@@ -81,7 +81,7 @@ class Api {
 
 //authorization: '5907e0a2-56a3-4cfa-b788-58e2a6027744',
 const api = new Api({
-  url: 'https://api.prk.mesto.nomoredomains.sbs/',
+  url: 'https://api.prkmesto.space/',
   headers: {
     "Content-Type": "application/json"
   }
