@@ -25,44 +25,48 @@ function App() {
   const [selectCard, setSelectCard] = useState(null);
   const [currenUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isRegister, setIsRegister] = useState(false);
   const [isRegPopupOpen, setIsRegPopupOpen] = useState(false);
-  const [userData, setUserData] = useState({});
   const [userEmail, setUserEmail] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [token, setToken] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
+    console.log('useEffect1.1 - ', loggedIn);
     if(loggedIn){
-      api.getAllCards()
-      .then(res => setCards(res))
-      .catch(err => alert(err));
-
       api.getUser()
-      .then(res => setCurrentUser(res))
-      .catch(err => alert(err));
+      .then(res => {
+        setCurrentUser(res);
+        setUserEmail(res.email);
+        api.getAllCards()
+        .then(allCards => setCards(allCards))
+        .catch(err => alert(err));
+      })
+      .catch(err => {
+        alert(err);
+        setLoggedIn(false);
+        console.log('useEffect1.2 - ', loggedIn);
+      });
     }
   }, [loggedIn]);
 
   useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  useEffect(() => {
-    if (loggedIn) {
-      history.push('/mesto-react-auth');
+    console.log('useEffect2.1 - ', loggedIn);
+    if(loggedIn) {
     } else {
-      localStorage.removeItem('token');
       history.push('/sign-in');
+      setCurrentUser({});
+      localStorage.clear();
+      console.log('useEffect2.2 - ', loggedIn);
     }
   }, [loggedIn]);
+
 
   const onCardClick = (cards) => setSelectCard(cards);
 
   const onLoggedIn = () => {
-    setLoggedIn(false);
+    //setLoggedIn(false);
   }
 
   function handleEditProfileClick() {
@@ -92,10 +96,13 @@ function App() {
   function handleCloseWindow() {
     auth.signout()
       .then(() => {
-        localStorage.removeItem('token');
         history.push('/sign-in');
+        setLoggedIn(false); 
+        console.log('handleCloseWindow + ', loggedIn);
       })
-      .catch(err => alert(err));
+      .catch(err => {
+        console.log('handleCloseWindow - ', loggedIn);
+      });
   }
 
   function handleUpdateUser(data) {
@@ -151,7 +158,6 @@ function App() {
   function handleRegisterUser(data){
     auth.register(data.email, data.password)
     .then((res) => {
-      history.push('/sign-in');
       setIsRegPopupOpen(true);
       setIsRegister(true);
     })
@@ -165,49 +171,25 @@ function App() {
     setUserEmail(data.email);
     auth.login(data.email, data.password)
     .then((res) => {
-      if (res.token) {
-        localStorage.setItem('token', res.token);
-        setToken(true);
-        history.push("/mesto-react-auth");
+      if (res) {
         setLoggedIn(true);
+        history.push("/mesto-react-auth");
+        console.log('handleLoggedUser + ', loggedIn)
       }
     })
     .catch(() => {
       setIsRegister(false);
       setIsRegPopupOpen(true);
+      setLoggedIn(false);
+      console.log('handleLoggedUser - ', loggedIn);
     });
   }
-
-  function tokenCheck() {
-    const jwt = localStorage.getItem('token');
-    if (jwt) {
-      setToken(true);
-      auth.checkJTW(jwt)
-        .then((res) => {
-          setUserData(res);
-          setUserEmail(res.data.email);
-          history.push('/mesto-react-auth');
-          setLoggedIn(true);
-      })
-        .catch(() => {
-          setIsRegister(false);
-          setIsRegPopupOpen(true);
-        });
-  };}
 
   return (
     <CurrenUserContext.Provider value={currenUser}>
       <div className="App">
         <div className="page">
           <Switch>
-            <Route path="/sign-in">
-              <Header pathNav={"/sign-up"} emailText={false} buttonTitle={"Зарегистрироваться"} />
-              <Login onLoggedUser={handleLoggedUser} />
-            </Route>
-            <Route path="/sign-up">
-              <Header pathNav={"/sign-in"} emailText={false} buttonTitle={"Войти"} />
-              <Register onRegisterUser={handleRegisterUser} />
-            </Route>
             <ProtectedRoute exact
               loggedIn={loggedIn}
               path="/mesto-react-auth"
@@ -229,8 +211,13 @@ function App() {
               onCardDelete={handleCardDelete}
               componentFooter={Footer} >
             </ProtectedRoute>
-            <Route exact path="/">
-              {loggedIn ? <Redirect to="/mesto-react-auth" /> : <Redirect to="/sign-in" />}
+            <Route path="/sign-in">
+              <Header pathNav={"/sign-up"} emailText={false} buttonTitle={"Зарегистрироваться"} />
+              <Login onLoggedUser={handleLoggedUser} />
+            </Route>
+            <Route path="/sign-up">
+              <Header pathNav={"/sign-in"} emailText={false} buttonTitle={"Войти"} />
+              <Register onRegisterUser={handleRegisterUser} />
             </Route>
           </Switch>
         </div>
