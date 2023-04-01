@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://localhost:5000';
-//export const BASE_URL = 'https://api.prkmesto.space';
+//export const BASE_URL = 'http://localhost:5000';
+export const BASE_URL = 'https://api.prkmesto.space';
 const checkResponse = (res) => {
   if(res.ok){
     return res.json();

@@ -82,7 +82,7 @@ class Api {
 //authorization: '5907e0a2-56a3-4cfa-b788-58e2a6027744',
 //url: 'https://api.prkmesto.space/' https://localhost:5000/,
 const api = new Api({
-  url: 'http://localhost:5000/',
+  url: 'https://api.prkmesto.space/',
   headers: {
     "Content-Type": "application/json"
   }
