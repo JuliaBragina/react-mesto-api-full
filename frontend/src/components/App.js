@@ -33,7 +33,6 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('useEffect1.1 - ', loggedIn);
     if(loggedIn){
       api.getUser()
       .then(res => {
@@ -41,24 +40,22 @@ function App() {
         setUserEmail(res.email);
         api.getAllCards()
         .then(allCards => setCards(allCards))
-        .catch(err => alert(err));
+        .catch(err => {
+          console.log(err);
+        });
       })
       .catch(err => {
-        alert(err);
         setLoggedIn(false);
-        console.log('useEffect1.2 - ', loggedIn);
       });
     }
   }, [loggedIn]);
 
   useEffect(() => {
-    console.log('useEffect2.1 - ', loggedIn);
     if(loggedIn) {
     } else {
       history.push('/sign-in');
       setCurrentUser({});
       localStorage.clear();
-      console.log('useEffect2.2 - ', loggedIn);
     }
   }, [loggedIn]);
 
@@ -66,7 +63,7 @@ function App() {
   const onCardClick = (cards) => setSelectCard(cards);
 
   const onLoggedIn = () => {
-    //setLoggedIn(false);
+    setLoggedIn(false);
   }
 
   function handleEditProfileClick() {
@@ -112,7 +109,9 @@ function App() {
       setCurrentUser(newUser);
       handleCloseButton();
     })
-    .catch(err => alert(err))
+    .catch(err => {
+      console.log(err);
+    })
     .finally(() => setIsLoading(false));
   }
 
@@ -123,7 +122,9 @@ function App() {
       setCurrentUser(newAvatar);
       handleCloseButton();
     })
-    .catch(err => alert(err))
+    .catch(err => {
+      console.log(err);
+    })
     .finally(() => setIsLoading(false));
   }
 
@@ -134,7 +135,9 @@ function App() {
       setCards([newCard, ...cards]);
       handleCloseButton();
     })
-    .catch(err => alert(err))
+    .catch(err => {
+      console.log(err);
+    })
     .finally(() => setIsLoading(false));
   }
 
@@ -144,7 +147,9 @@ function App() {
     .then((newCard) => {
       setCards((state) => state.map((c) => c._id === data._id ? newCard : c));
     })
-    .catch(err => alert(err));
+    .catch(err => {
+      console.log(err);
+    });
   } 
 
   function handleCardDelete(idCard) {
@@ -152,7 +157,9 @@ function App() {
     .then(() => {
       setCards(cards => cards.filter(c => c._id != idCard));
     })
-    .catch(err => alert(err));
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   function handleRegisterUser(data){
@@ -173,15 +180,13 @@ function App() {
     .then((res) => {
       if (res) {
         setLoggedIn(true);
-        history.push("/mesto-react-auth");
-        console.log('handleLoggedUser + ', loggedIn)
+        history.push('/');
       }
     })
     .catch(() => {
       setIsRegister(false);
       setIsRegPopupOpen(true);
       setLoggedIn(false);
-      console.log('handleLoggedUser - ', loggedIn);
     });
   }
 
@@ -192,7 +197,7 @@ function App() {
           <Switch>
             <ProtectedRoute exact
               loggedIn={loggedIn}
-              path="/mesto-react-auth"
+              path="/"
               onLoggedout={onLoggedIn}
               componentHeader={Header}
               isMenuOpen={isMenuOpen}

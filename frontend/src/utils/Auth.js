@@ -10,6 +10,7 @@ const checkResponse = (res) => {
 export function register(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -20,6 +21,7 @@ export function register(email, password) {
 export function checkJTW(jwt) {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       "Authorization" : `Bearer ${jwt}`
@@ -30,6 +32,7 @@ export function checkJTW(jwt) {
 export function login(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
